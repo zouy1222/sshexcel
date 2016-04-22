@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+    <package name="default" namespace="/" extends="struts-default">
+    	<action name="export_*" class="com.demo.cyd.action.StudentAction" method="{1}">
+    		<result name="listAll">/listALL.jsp</result>
+    		<result name="success" type="redirect">export_listAll.action</result>
+			<result name="excel" type="stream">
+			    <param name="contentType">application/vnd.ms-excel</param>
+			    <param name="contentDisposition">attachment;filename="AllUsers.xls"</param>
+			    <param name="inputName">excelFile</param>
+			</result>
+            <result name="pdf" type="stream">
+                <param name="contentType">application/pdf; charset=gb2312</param>
+                <param name="inputName">excelFile</param>
+                <param name="contentDisposition">attachment; filename="contract.pdf"</param>
+                <param name="bufferSize">2048</param>
+            </result>
+            <result name="word" type="redirect">export_listAll.action</result>
+		</action>
+    </package>
+</struts>
